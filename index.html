@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc mừng 20/10</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg1: #fde2e4;
+            --bg2: #f9d4ec;
+            --rose: #e11d48;
+            --rose-deep: #be123c;
+            --stem: #065f46;
+            --leaf: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: radial-gradient(1200px 700px at 70% 20%, #ffe6f5 0%, var(--bg2) 35%, var(--bg1) 100%);
+            overflow: hidden;
+            color: #1f2937;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .title {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(42px, 6vw, 86px);
+            color: #9d174d;
+            text-shadow: 0 2px 20px rgba(157, 23, 77, 0.15);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: clamp(14px, 2.2vw, 18px);
+            color: #9d174d;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .petal-field {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .petal {
+            position: absolute;
+            top: -60px;
+            width: 32px;
+            height: 38px;
+            transform: rotate(0deg);
+            opacity: 0.92;
+            filter: drop-shadow(0 8px 12px rgba(190, 18, 60, 0.4));
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.5) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 60% at 40% 40%, #ff79a1 0%, #f43f5e 40%, #e11d48 70%, #be123c 100%);
+            border-radius: 60% 60% 60% 8% / 70% 70% 30% 18%;
+            animation: fall var(--dur) ease-in-out forwards, spin3d var(--dur) linear forwards;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-80px) translateX(0) rotateX(0deg) rotateZ(0deg);
+                opacity: 0;
+            }
+
+            5% {
+                opacity: 0.92;
+            }
+
+            70% {
+                transform: translateY(70vh) translateX(var(--sx, 0px)) rotateX(720deg) rotateZ(360deg);
+                opacity: 0.85;
+            }
+
+            100% {
+                transform: translateY(105vh) translateX(calc(var(--sx, 0px) * 1.2)) rotateX(1080deg) rotateZ(540deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes spin3d {
+            0% {
+                transform: perspective(600px) rotateY(0deg);
+            }
+
+            100% {
+                transform: perspective(600px) rotateY(var(--ry, 720deg));
+            }
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            background: rgba(255, 240, 246, 0.65);
+            backdrop-filter: blur(6px);
+        }
+
+        .modal.show {
+            display: flex;
+            animation: fadeIn 0.35s ease both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .card {
+            width: min(720px, 90vw);
+            background: linear-gradient(180deg, #fff 0%, #fff5f8 100%);
+            border-radius: 24px;
+            padding: 28px 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            border: 1px solid #ffd1e1;
+        }
+
+        .card h3 {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(30px, 4.5vw, 48px);
+            color: #be123c;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            font-size: clamp(15px, 2.2vw, 18px);
+            line-height: 1.7;
+            color: #374151;
+            margin-bottom: 20px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .btn {
+            border: 0;
+            border-radius: 999px;
+            padding: 12px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, #f43f5e, #be123c);
+            color: #fff;
+            box-shadow: 0 6px 16px rgba(225, 29, 72, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 18px rgba(225, 29, 72, 0.35);
+        }
+
+        .btn-ghost {
+            background: #fff;
+            color: #be123c;
+            border: 1px solid #ffd1e1;
+        }
+
+        .signature {
+            position: absolute;
+            bottom: 14px;
+            right: 18px;
+            z-index: 1;
+            font-size: 12px;
+            color: #9ca3af;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            animation: twinkle 2.2s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                transform: scale(0.5);
+                opacity: 0.4;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #e11d48;
+            transform: rotate(45deg);
+            opacity: 0;
+            animation: floatUp 4s ease-in-out forwards;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #e11d48;
+            border-radius: 50%;
+        }
+
+        .heart:before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart:after {
+            top: 0;
+            left: -10px;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(45deg) scale(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100vh) rotate(45deg) scale(1);
+                opacity: 0;
+            }
+        }
+
+        .firework {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+            animation: fireworkLaunch 1.5s ease-out forwards;
+            z-index: 5;
+        }
+
+        .firework-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            animation: fireworkExplode 1s ease-out forwards;
+            z-index: 5;
+        }
+
+        @keyframes fireworkLaunch {
+            0% {
+                transform: translateY(100vh);
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(var(--targetY, 30vh));
+                opacity: 0;
+            }
+        }
+
+        @keyframes fireworkExplode {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+                width: 6px;
+                height: 6px;
+            }
+            100% {
+                transform: translate(var(--tx, 0), var(--ty, 0));
+                opacity: 0;
+                width: 3px;
+                height: 3px;
+            }
+        }
+
+        .celebration-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(48px, 8vw, 96px);
+            color: #e11d48;
+            text-shadow: 0 2px 20px rgba(157, 23, 77, 0.3);
+            text-align: center;
+            z-index: 6;
+            animation: textAppear 2s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes textAppear {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .firework-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            z-index: 10;
+        }
+
+        .firework-btn {
+            background: linear-gradient(90deg, #f43f5e, #be123c);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(225, 29, 72, 0.25);
+            transition: transform 0.15s ease, box-shadow 0.2s ease;
+        }
+
+        .firework-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(225, 29, 72, 0.35);
+        }
+        .title, .subtitle {
+    transition: opacity 1s ease; /* hiệu ứng mờ dần */
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="title">Happy Vietnamese Women's Day 20/10</h1>
+        <p class="subtitle">Trao gửi yêu thương đến một nửa xinh đẹp của thế giới 🌹</p>
+
+        <div class="petal-field" id="petalField"></div>
+
+        <div class="sparkle" style="top:18%; left:10%; animation-delay:.2s"></div>
+        <div class="sparkle" style="top:26%; left:82%; animation-delay:.8s"></div>
+        <div class="sparkle" style="top:62%; left:14%; animation-delay:1.1s"></div>
+        <div class="sparkle" style="top:72%; left:78%; animation-delay:.4s"></div>
+    </div>
+
+    <div class="modal" id="modal">
+        <div class="card">
+            <h3 id="modalTitle">Lời chúc 20/10</h3>
+            <p id="modalText">Chúc những người phụ nữ tuyệt vời luôn xinh đẹp, hạnh phúc và thành công trong cuộc sống.
+                Cảm ơn vì tất cả những hy sinh thầm lặng và tình yêu vô điều kiện!</p>
+            <div class="actions">
+                <button class="btn btn-primary" id="btnNext">Tiếp tục ❤️</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="signature">Made with 💖 for 20/10</div>
+
+    <script>
+        const petalField = document.getElementById('petalField');
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalText = document.getElementById('modalText');
+        const btnNext = document.getElementById('btnNext');
+        const btnFireworks = document.getElementById('btnFireworks');
+
+        // Danh sách các lời chúc
+        const wishes = [
+            {
+                title: "Gửi Bạn - Người phụ nữ tuyệt vời ",
+                text: "Cảm ơn bạn vì luôn là một phần đặc biệt trong cuộc sống. Chúc bạn 20/10 thật vui vẻ, luôn khỏe mạnh, hạnh phúc và xinh đẹp rạng ngời!"
+            },
+            {
+                title: "Gửi Bạn - Người phụ nữ tuyệt vời ",
+                text: "Chúc bạn luôn rạng rỡ và đầy năng lượng tích cực. Những điều bạn chia sẻ và cách bạn sống là nguồn cảm hứng tuyệt vời cho mọi người xung quanh!"
+            },
+            {
+                title: "Gửi Bạn - Người phụ nữ tuyệt vời ",
+                text: "Mong bạn luôn tự tin, xinh đẹp và thành công. Mỗi ngày làm việc đều trở nên thú vị hơn khi có bạn đồng hành và chia sẻ!"
+            },
+            {
+                title: "Gửi Bạn - Người phụ nữ tuyệt vời ",
+                text: "Chúc bạn mọi điều tốt đẹp nhất – nụ cười luôn nở trên môi, mọi ước mơ đều thành hiện thực. 20/10 thật ngọt ngào và đầy ý nghĩa nhé!"
+            }
+        ];
+
+        let currentWishIndex = 0;
+        let fireworksActive = false;
+
+        // Tạo hiệu ứng hoa rơi
+        function startPetals() {
+            const waves = 5;
+            const perWave = 28;
+
+            for (let w = 0; w < waves; w++) {
+                setTimeout(() => {
+                    for (let i = 0; i < perWave; i++) {
+                        setTimeout(() => spawnPetal(), i * 25);
+                    }
+                }, w * 700);
+            }
+
+            let drizzleCount = 0;
+            const drizzle = setInterval(() => {
+                spawnPetal(true);
+                drizzleCount++;
+                if (drizzleCount > 100) clearInterval(drizzle);
+            }, 160);
+        }
+
+        function spawnPetal(isLight = false) {
+            const el = document.createElement('div');
+            el.className = 'petal';
+            const startX = Math.random() * 100;
+            const swayX = (Math.random() * 140 - 70);
+            const dur = (isLight ? (4.5 + Math.random() * 4) : (5.5 + Math.random() * 5));
+            const ry = 540 + Math.random() * 360;
+            const size = isLight ? (20 + Math.random() * 16) : (28 + Math.random() * 20);
+
+            el.style.left = startX + 'vw';
+            el.style.setProperty('--sx', swayX + 'px');
+            el.style.setProperty('--dur', dur + 's');
+            el.style.setProperty('--ry', ry + 'deg');
+            el.style.width = size + 'px';
+            el.style.height = (size * 1.18) + 'px';
+
+            petalField.appendChild(el);
+            setTimeout(() => { el.remove(); }, dur * 1000 + 1500);
+        }
+
+        // Tạo hiệu ứng trái tim bay
+        function createHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (3 + Math.random() * 3) + 's';
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 4000);
+            }, 500);
+        }
+
+        // Hiển thị modal với lời chúc
+        function showWish(index) {
+            modalTitle.textContent = wishes[index].title;
+            modalText.textContent = wishes[index].text;
+            modal.classList.add('show');
+        }
+
+        // Tạo hiệu ứng pháo hoa
+        function createFireworks() {
+            if (fireworksActive) return;
+            
+            fireworksActive = true;
+            // Làm mờ dần tiêu đề và phụ đề khi pháo hoa bắt đầu
+document.querySelector('.title').style.opacity = '0';
+document.querySelector('.subtitle').style.opacity = '0';
+
+            // Tạo văn bản chúc mừng
+            const celebrationText = document.createElement('div');
+            celebrationText.className = 'celebration-text';
+            celebrationText.textContent = '20/10 Vui Vẻ!';
+            document.body.appendChild(celebrationText);
+            
+            // Tạo nhiều pháo hoa
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    createFirework();
+                }, i * 300);
+            }
+            
+            // Tăng cường hiệu ứng hoa rơi
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    spawnPetal(true);
+                }, i * 100);
+            }
+            
+            // Tạo thêm pháo hoa sau 3 giây
+            setTimeout(() => {
+                for (let i = 0; i < 10; i++) {
+                    setTimeout(() => {
+                        createFirework();
+                    }, i * 400);
+                }
+            }, 3000);
+            
+            // Cho phép bắn pháo hoa lại sau 5 giây
+            setTimeout(() => {
+                fireworksActive = false;
+                // Hiện lại tiêu đề và phụ đề sau 5 giây (mờ dần trở lại)
+
+
+            }, 5000);
+        }
+
+        function createFirework() {
+            // Tạo pháo hoa bay lên
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            
+            // Vị trí ngẫu nhiên
+            const x = Math.random() * 80 + 10;
+            const targetY = Math.random() * 40 + 20;
+            
+            // Màu sắc ngẫu nhiên
+            const colors = [
+                '#e11d48', '#f43f5e', '#be123c', // Hồng/đỏ
+                '#f59e0b', '#d97706', // Vàng/cam
+                '#8b5cf6', '#7c3aed', // Tím
+                '#06b6d4', '#0891b2', // Xanh dương
+                '#10b981', '#059669'  // Xanh lá
+            ];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
+            firework.style.left = x + 'vw';
+            firework.style.backgroundColor = color;
+            firework.style.boxShadow = `0 0 0 4px ${color}20`;
+            firework.style.setProperty('--targetY', targetY + 'vh');
+            
+            document.body.appendChild(firework);
+            
+            // Tạo hiệu ứng nổ sau khi pháo hoa bay lên
+            setTimeout(() => {
+                firework.remove();
+                createExplosion(x, targetY, color);
+            }, 1500);
+        }
+
+        function createExplosion(x, y, color) {
+            const particleCount = 40 + Math.floor(Math.random() * 30);
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'firework-particle';
+                
+                // Tính toán hướng bay ngẫu nhiên
+                const angle = (Math.PI * 2 * i) / particleCount;
+                const distance = 30 + Math.random() * 70;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+                
+                particle.style.left = x + 'vw';
+                particle.style.top = y + 'vh';
+                particle.style.backgroundColor = color;
+                particle.style.setProperty('--tx', tx + 'px');
+                particle.style.setProperty('--ty', ty + 'px');
+                
+                document.body.appendChild(particle);
+                
+                // Xóa particle sau khi animation kết thúc
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.remove();
+                    }
+                }, 1000);
+            }
+        }
+
+        // Hiển thị modal đầu tiên sau 2 giây
+        setTimeout(() => {
+            showWish(currentWishIndex);
+        }, 2000);
+
+        // Bắt đầu hiệu ứng
+        startPetals();
+        createHearts();
+
+        // Xử lý sự kiện nút tiếp tục
+        btnNext.addEventListener('click', () => {
+            modal.classList.remove('show');
+
+            setTimeout(() => {
+                currentWishIndex++;
+
+                if (currentWishIndex < wishes.length) {
+                    // Hiển thị modal tiếp theo
+                    showWish(currentWishIndex);
+                } else {
+                    // Kích hoạt pháo hoa sau modal cuối cùng
+                    createFireworks();
+                }
+            }, 300);
+        });
+
+       
+    </script>
+</body>
+
+</html>
