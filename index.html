@@ -306,9 +306,11 @@
                 transform: translateY(100vh);
                 opacity: 1;
             }
+
             80% {
                 opacity: 1;
             }
+
             100% {
                 transform: translateY(var(--targetY, 30vh));
                 opacity: 0;
@@ -322,6 +324,7 @@
                 width: 6px;
                 height: 6px;
             }
+
             100% {
                 transform: translate(var(--tx, 0), var(--ty, 0));
                 opacity: 0;
@@ -350,10 +353,12 @@
                 transform: translate(-50%, -50%) scale(0);
                 opacity: 0;
             }
+
             50% {
                 transform: translate(-50%, -50%) scale(1.2);
                 opacity: 1;
             }
+
             100% {
                 transform: translate(-50%, -50%) scale(1);
                 opacity: 1;
@@ -383,10 +388,12 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(225, 29, 72, 0.35);
         }
-        .title, .subtitle {
-    transition: opacity 1s ease; /* hiệu ứng mờ dần */
-}
 
+        .title,
+        .subtitle {
+            transition: opacity 1s ease;
+            /* hiệu ứng mờ dần */
+        }
     </style>
 </head>
 
@@ -429,20 +436,20 @@
         // Danh sách các lời chúc
         const wishes = [
             {
-                title: "Gửi Bạn - Người phụ nữ tuyệt vời ",
-                text: "Cảm ơn bạn vì luôn là một phần đặc biệt trong cuộc sống. Chúc bạn 20/10 thật vui vẻ, luôn khỏe mạnh, hạnh phúc và xinh đẹp rạng ngời!"
+                title: "Gửi Bạn - Nữ thần sống ảo",
+                text: "Chúc bạn 20/10 xinh như ảnh mạng, ăn không mập, ngủ không béo, sống chill hết nấc!"
             },
             {
-                title: "Gửi Bạn - Người phụ nữ tuyệt vời ",
-                text: "Chúc bạn luôn rạng rỡ và đầy năng lượng tích cực. Những điều bạn chia sẻ và cách bạn sống là nguồn cảm hứng tuyệt vời cho mọi người xung quanh!"
+                title: "Gửi Bạn - Nữ chiến binh deadline",
+                text: "Chúc bạn deadline nào cũng vượt, boss nào cũng né được, lương tăng như giá xăng!"
             },
             {
-                title: "Gửi Bạn - Người phụ nữ tuyệt vời ",
-                text: "Mong bạn luôn tự tin, xinh đẹp và thành công. Mỗi ngày làm việc đều trở nên thú vị hơn khi có bạn đồng hành và chia sẻ!"
+                title: "Gửi Bạn - Nữ hoàng tám chuyện",
+                text: "20/10 vui vẻ nha! Chúc bạn nói chuyện không khô họng, tám hoài không hết chuyện!"
             },
             {
-                title: "Gửi Bạn - Người phụ nữ tuyệt vời ",
-                text: "Chúc bạn mọi điều tốt đẹp nhất – nụ cười luôn nở trên môi, mọi ước mơ đều thành hiện thực. 20/10 thật ngọt ngào và đầy ý nghĩa nhé!"
+                title: "Gửi Bạn - Nữ chính cuộc đời",
+                text: "Chúc bạn luôn là nữ chính, không cần nam phụ, tự viết kịch bản đời mình thật chất!"
             }
         ];
 
@@ -515,32 +522,32 @@
         // Tạo hiệu ứng pháo hoa
         function createFireworks() {
             if (fireworksActive) return;
-            
+
             fireworksActive = true;
             // Làm mờ dần tiêu đề và phụ đề khi pháo hoa bắt đầu
-document.querySelector('.title').style.opacity = '0';
-document.querySelector('.subtitle').style.opacity = '0';
+            document.querySelector('.title').style.opacity = '0';
+            document.querySelector('.subtitle').style.opacity = '0';
 
             // Tạo văn bản chúc mừng
             const celebrationText = document.createElement('div');
             celebrationText.className = 'celebration-text';
             celebrationText.textContent = '20/10 Vui Vẻ!';
             document.body.appendChild(celebrationText);
-            
+
             // Tạo nhiều pháo hoa
             for (let i = 0; i < 15; i++) {
                 setTimeout(() => {
                     createFirework();
                 }, i * 300);
             }
-            
+
             // Tăng cường hiệu ứng hoa rơi
             for (let i = 0; i < 50; i++) {
                 setTimeout(() => {
                     spawnPetal(true);
                 }, i * 100);
             }
-            
+
             // Tạo thêm pháo hoa sau 3 giây
             setTimeout(() => {
                 for (let i = 0; i < 10; i++) {
@@ -549,7 +556,7 @@ document.querySelector('.subtitle').style.opacity = '0';
                     }, i * 400);
                 }
             }, 3000);
-            
+
             // Cho phép bắn pháo hoa lại sau 5 giây
             setTimeout(() => {
                 fireworksActive = false;
@@ -563,11 +570,11 @@ document.querySelector('.subtitle').style.opacity = '0';
             // Tạo pháo hoa bay lên
             const firework = document.createElement('div');
             firework.className = 'firework';
-            
+
             // Vị trí ngẫu nhiên
             const x = Math.random() * 80 + 10;
             const targetY = Math.random() * 40 + 20;
-            
+
             // Màu sắc ngẫu nhiên
             const colors = [
                 '#e11d48', '#f43f5e', '#be123c', // Hồng/đỏ
@@ -577,14 +584,14 @@ document.querySelector('.subtitle').style.opacity = '0';
                 '#10b981', '#059669'  // Xanh lá
             ];
             const color = colors[Math.floor(Math.random() * colors.length)];
-            
+
             firework.style.left = x + 'vw';
             firework.style.backgroundColor = color;
             firework.style.boxShadow = `0 0 0 4px ${color}20`;
             firework.style.setProperty('--targetY', targetY + 'vh');
-            
+
             document.body.appendChild(firework);
-            
+
             // Tạo hiệu ứng nổ sau khi pháo hoa bay lên
             setTimeout(() => {
                 firework.remove();
@@ -594,25 +601,25 @@ document.querySelector('.subtitle').style.opacity = '0';
 
         function createExplosion(x, y, color) {
             const particleCount = 40 + Math.floor(Math.random() * 30);
-            
+
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'firework-particle';
-                
+
                 // Tính toán hướng bay ngẫu nhiên
                 const angle = (Math.PI * 2 * i) / particleCount;
                 const distance = 30 + Math.random() * 70;
                 const tx = Math.cos(angle) * distance;
                 const ty = Math.sin(angle) * distance;
-                
+
                 particle.style.left = x + 'vw';
                 particle.style.top = y + 'vh';
                 particle.style.backgroundColor = color;
                 particle.style.setProperty('--tx', tx + 'px');
                 particle.style.setProperty('--ty', ty + 'px');
-                
+
                 document.body.appendChild(particle);
-                
+
                 // Xóa particle sau khi animation kết thúc
                 setTimeout(() => {
                     if (particle.parentNode) {
@@ -648,7 +655,7 @@ document.querySelector('.subtitle').style.opacity = '0';
             }, 300);
         });
 
-       
+
     </script>
 </body>
 
